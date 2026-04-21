@@ -1,0 +1,10 @@
+*.db
+*.db
+*.db
+/src/my_pkg/.vscode
+/src
+*.db
+*.db
+src/my_pkg/.vscode/browse.vc.db
+/src/my_pkg
+/src
