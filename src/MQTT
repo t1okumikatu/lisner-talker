@@ -1,0 +1,133 @@
+MQTT
+ROS 2 Humble環境において、`venv`（仮想環境）を使用してMQTTブリッジを構築し、Windowsからのジョイスティック入力でロボットを制御するための手順をまとめました。
+
+GitHubの `README.md` にそのまま貼り付けて使える構成で詳しく説明します。
+
+---
+
+# ROS 2 MQTT Bridge for Joystick Control
+
+このプロジェクトは、Windows側で取得したジョイスティック（ゲームパッド）の入力をMQTT経由で送信し、Ubuntu（ROS 2 Humble）上のロボットを制御するためのブリッジシステムです。
+
+## システム構成
+
+1. **送信側 (Windows)**: `pygame` でコントローラー入力を取得し、MQTTでパブリッシュ。
+2. **中継役 (Ubuntu)**: `mosquitto` ブローカーがメッセージを仲介。
+3. **受信側 (Ubuntu/ROS 2)**: MQTTをサブスクライブし、ROS 2の `geometry_msgs/Twist` に変換してロボットを制御。
+
+---
+
+## Ubuntu側のセットアップ (ROS 2 Humble)
+
+複数人での開発を想定し、システムのPython環境を汚さないよう `venv` を使用します。
+
+### 1. 必要なパッケージのインストール
+まず、MQTTブローカーとPythonの仮想環境用ツールをインストールします。
+
+```bash
+sudo apt update
+sudo apt install mosquitto mosquitto-clients python3-venv
+```
+
+### 2. 仮想環境の作成
+ROS 2のライブラリ（`rclpy`など）を仮想環境内から参照できるように、`--system-site-packages` フラグを付けて作成するのがポイントです。
+
+```bash
+# プロジェクトディレクトリへ移動
+cd ~/your_project_directory
+
+# 仮想環境を作成
+python3 -m venv --system-site-packages .venv
+
+# 仮想環境を有効化
+source .venv/bin/activate
+
+# 必要なライブラリのみをインストール
+pip install paho-mqtt
+```
+
+### 3. ブリッジノードの作成 (`mqtt_ros_bridge.py`)
+以下の内容でファイルを作成します。
+
+```python
+import rclpy
+from rclpy.node import Node
+from geometry_msgs.msg import Twist
+import paho.mqtt.client as mqtt
+import json
+
+class MqttRosBridge(Node):
+    def __init__(self):
+        super().__init__('mqtt_ros_bridge')
+        self.publisher_ = self.create_publisher(Twist, 'cmd_vel', 10)
+        
+        # MQTTの設定
+        self.mqtt_client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
+        self.mqtt_client.on_message = self.on_message
+        self.mqtt_client.connect("localhost", 1883, 60)
+        self.mqtt_client.subscribe("robot/joystick")
+        self.mqtt_client.loop_start()
+        self.get_logger().info('MQTT-ROS Bridge Node has started')
+
+    def on_message(self, client, userdata, msg):
+        try:
+            data = json.loads(msg.payload)
+            twist = Twist()
+            # スティックの値を速度指令にマッピング
+            # スティックの上方向が y: -1.0 なので反転させています
+            twist.linear.x = -float(data['y']) 
+            twist.angular.z = -float(data['x'])
+            
+            self.publisher_.publish(twist)
+        except Exception as e:
+            self.get_logger().error(f'Error parsing message: {e}')
+
+def main():
+    rclpy.init()
+    node = MqttRosBridge()
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
+```
+
+---
+
+## 実行手順
+
+開発メンバーが環境を再現する際は、以下の順序で実行してください。
+
+### 1. Ubuntu側：ブリッジの起動
+ターミナルを起動し、ROS 2環境と仮想環境を両方読み込みます。
+
+```bash
+# 1. ROS 2の環境設定を読み込む
+source /opt/ros/humble/setup.bash
+
+# 2. 仮想環境を有効化
+source .venv/bin/activate
+
+# 3. ブリッジノードを実行
+python mqtt_ros_bridge.py
+```
+
+### 2. Windows側：コントローラーパブリッシャーの起動
+WindowsのPython環境（`pygame`, `paho-mqtt` インストール済み）で、先に作成した `win_joy_pub_geometry.py` を実行します。
+※ `WSL_IP` の部分は、UbuntuロボットのIPアドレスに書き換えてください。
+
+---
+
+## 注意点
+- **ネットワーク**: WindowsとUbuntuが同一ネットワークに接続されている必要があります。
+- **ファイアウォール**: Ubuntu側でMQTT（ポート1883）の通信が許可されているか確認してください。
+- **依存関係の共有**: 新しくライブラリを追加した場合は、`pip freeze > requirements.txt` を実行してリポジトリに反映させてください。
+
+---
+
+この内容をGitHubの `README.md` として保存しておけば、他のメンバーも迷わずに環境構築ができるはずです！

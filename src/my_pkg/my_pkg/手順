@@ -1,0 +1,69 @@
+手順
+ros2 run my_pkg talker
+ros2 run my_pkg listener
+cd ~/ros2_basic_ws
+colcon build
+source install/setup.bash
+ros2 pkg list | grep my_pkg
+ros2 run my_pkg talker
+① setup.py確認
+nano ~/ros2_basic_ws/src/my_pkg/setup.py
+
+👉 これがあるか👇
+
+'console_scripts': [
+    'talker = my_pkg.talker:main',
+    'listener = my_pkg.listener:main',
+],
+② installされているか確認
+ls ~/ros2_basic_ws/install/my_pkg
+
+👉 無ければビルド失敗
+
+■ もう1つ重要ポイント
+
+今プロンプト👇
+
+(env)
+
+👉 Python仮想環境が有効
+
+👉 これがROS2と競合することあり
+
+一度外す（推奨）
+deactivate
+■ クーちゃんの一発診断
+
+今回の原因はほぼ👇
+
+👉 source忘れ or 実行場所が違う
+
+■ 最短復旧コマンド（これコピペOK）
+cd ~/ros2_basic_ws
+colcon build
+source install/setup.bash
+ros2 pkg list | grep my_pkg
+ros2 run my_pkg talker
+
+やってみて 👍
+もしまだダメなら👇貼ってください
+
+ros2 pkg list | grep my_pkg
+
+👉 ここで原因100%特定できます
+[INFO] [1776498423.899152883] [talker]: 送信: "Hello 102"
+[INFO] [1776498424.899230637] [talker]: 送信: "Hello 103"
+[INFO] [1776498425.899204072] [talker]: 送信: "Hello 104"
+[INFO] [1776498426.899157629] [talker]: 送信: "Hello 105"
+[INFO] [1776498427.899184831] [talker]: 送信: "Hello 106"
+[INFO] [1776498428.899286652] [talker]: 送信: "Hello 107"
+[INFO] [1776498429.899197361] [talker]: 送信: "Hello 108"
+[INFO] [1776498430.899180530] [talker]: 送信: "Hello 109"
+
+
+.899437127] [listener]: 受信: "Hello 108"
+[INFO] [1776498430.899407598] [listener]: 受信: "Hello 109"
+[INFO] [1776498431.899548270] [listener]: 受信: "Hello 110"
+[INFO] [1776498432.899628258] [listener]: 受信: "Hello 111"
+[INFO] [1776498433.899401600] [listener]: 受信: "Hello 112"
+[INFO] [1776498434.899428841] [listener]: 受信: "Hello 113"

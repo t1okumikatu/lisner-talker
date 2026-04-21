@@ -1,0 +1,22 @@
+[0.580s] Invoking command in '/home/avatar1/ros2_basic_ws/src/my_pkg': PYTHONPATH=/home/avatar1/ros2_basic_ws/build/my_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/avatar1/ros2_basic_ws/install/my_pkg/lib/python3.10/site-packages:${PYTHONPATH} VIRTUAL_ENV_PROMPT=(env) /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/my_pkg build --build-base /home/avatar1/ros2_basic_ws/build/my_pkg/build install --record /home/avatar1/ros2_basic_ws/build/my_pkg/install.log --single-version-externally-managed install_data
+[0.810s] running egg_info
+[0.811s] writing ../../build/my_pkg/my_pkg.egg-info/PKG-INFO
+[0.811s] writing dependency_links to ../../build/my_pkg/my_pkg.egg-info/dependency_links.txt
+[0.811s] writing entry points to ../../build/my_pkg/my_pkg.egg-info/entry_points.txt
+[0.811s] writing requirements to ../../build/my_pkg/my_pkg.egg-info/requires.txt
+[0.811s] writing top-level names to ../../build/my_pkg/my_pkg.egg-info/top_level.txt
+[0.813s] reading manifest file '../../build/my_pkg/my_pkg.egg-info/SOURCES.txt'
+[0.814s] writing manifest file '../../build/my_pkg/my_pkg.egg-info/SOURCES.txt'
+[0.814s] running build
+[0.814s] running build_py
+[0.814s] running install
+[0.815s] running install_lib
+[0.817s] running install_data
+[0.817s] running install_egg_info
+[0.819s] removing '/home/avatar1/ros2_basic_ws/install/my_pkg/lib/python3.10/site-packages/my_pkg-0.0.0-py3.10.egg-info' (and everything under it)
+[0.819s] Copying ../../build/my_pkg/my_pkg.egg-info to /home/avatar1/ros2_basic_ws/install/my_pkg/lib/python3.10/site-packages/my_pkg-0.0.0-py3.10.egg-info
+[0.820s] running install_scripts
+[0.842s] Installing listener script to /home/avatar1/ros2_basic_ws/install/my_pkg/lib/my_pkg
+[0.842s] Installing talker script to /home/avatar1/ros2_basic_ws/install/my_pkg/lib/my_pkg
+[0.842s] writing list of installed files to '/home/avatar1/ros2_basic_ws/build/my_pkg/install.log'
+[0.866s] Invoked command in '/home/avatar1/ros2_basic_ws/src/my_pkg' returned '0': PYTHONPATH=/home/avatar1/ros2_basic_ws/build/my_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/avatar1/ros2_basic_ws/install/my_pkg/lib/python3.10/site-packages:${PYTHONPATH} VIRTUAL_ENV_PROMPT=(env) /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/my_pkg build --build-base /home/avatar1/ros2_basic_ws/build/my_pkg/build install --record /home/avatar1/ros2_basic_ws/build/my_pkg/install.log --single-version-externally-managed install_data
