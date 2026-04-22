@@ -1,13 +1,13 @@
 手順
 ros2 run my_pkg talker
 ros2 run my_pkg listener
-cd ~/ros2_basic_ws
+cd ~/lisner-talker
 colcon build
 source install/setup.bash
 ros2 pkg list | grep my_pkg
 ros2 run my_pkg talker
 ① setup.py確認
-nano ~/ros2_basic_ws/src/my_pkg/setup.py
+nano ~/lisner-talker/src/my_pkg/setup.py
 
 👉 これがあるか👇
 
@@ -16,7 +16,7 @@ nano ~/ros2_basic_ws/src/my_pkg/setup.py
     'listener = my_pkg.listener:main',
 ],
 ② installされているか確認
-ls ~/ros2_basic_ws/install/my_pkg
+ls ~/lisner-talker/install/my_pkg
 
 👉 無ければビルド失敗
 
