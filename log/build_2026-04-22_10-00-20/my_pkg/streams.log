@@ -1,0 +1,22 @@
+[1.630s] Invoking command in '/home/keime/デスクトップ/lisner-talker/src/my_pkg': PYTHONPATH=/home/keime/デスクトップ/lisner-talker/build/my_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/keime/デスクトップ/lisner-talker/install/my_pkg/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/my_pkg build --build-base /home/keime/デスクトップ/lisner-talker/build/my_pkg/build install --record /home/keime/デスクトップ/lisner-talker/build/my_pkg/install.log --single-version-externally-managed install_data
+[3.366s] running egg_info
+[3.370s] writing ../../build/my_pkg/my_pkg.egg-info/PKG-INFO
+[3.375s] writing dependency_links to ../../build/my_pkg/my_pkg.egg-info/dependency_links.txt
+[3.376s] writing entry points to ../../build/my_pkg/my_pkg.egg-info/entry_points.txt
+[3.376s] writing requirements to ../../build/my_pkg/my_pkg.egg-info/requires.txt
+[3.376s] writing top-level names to ../../build/my_pkg/my_pkg.egg-info/top_level.txt
+[3.396s] reading manifest file '../../build/my_pkg/my_pkg.egg-info/SOURCES.txt'
+[3.401s] writing manifest file '../../build/my_pkg/my_pkg.egg-info/SOURCES.txt'
+[3.406s] running build
+[3.410s] running build_py
+[3.411s] running install
+[3.411s] running install_lib
+[3.418s] running install_data
+[3.419s] running install_egg_info
+[3.426s] removing '/home/keime/デスクトップ/lisner-talker/install/my_pkg/lib/python3.10/site-packages/my_pkg-0.0.0-py3.10.egg-info' (and everything under it)
+[3.430s] Copying ../../build/my_pkg/my_pkg.egg-info to /home/keime/デスクトップ/lisner-talker/install/my_pkg/lib/python3.10/site-packages/my_pkg-0.0.0-py3.10.egg-info
+[3.437s] running install_scripts
+[3.482s] Installing listener script to /home/keime/デスクトップ/lisner-talker/install/my_pkg/lib/my_pkg
+[3.486s] Installing talker script to /home/keime/デスクトップ/lisner-talker/install/my_pkg/lib/my_pkg
+[3.486s] writing list of installed files to '/home/keime/デスクトップ/lisner-talker/build/my_pkg/install.log'
+[3.542s] Invoked command in '/home/keime/デスクトップ/lisner-talker/src/my_pkg' returned '0': PYTHONPATH=/home/keime/デスクトップ/lisner-talker/build/my_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/keime/デスクトップ/lisner-talker/install/my_pkg/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/my_pkg build --build-base /home/keime/デスクトップ/lisner-talker/build/my_pkg/build install --record /home/keime/デスクトップ/lisner-talker/build/my_pkg/install.log --single-version-externally-managed install_data
